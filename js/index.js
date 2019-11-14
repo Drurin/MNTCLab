@@ -53,6 +53,12 @@ function foldinginfo() { //For future errors, refer to: https://stackoverflow.co
                 let globalRank = fetched.donors[i].rank;
                 let credit = fetched.donors[i].credit;
                 let WUs = fetched.donors[i].wus;
+                let logo = fetched.logo;
+                
+                var anchor = document.getElementById("logo");
+                var att = document.createAttribute("src");
+                att.value = logo;
+                anchor.setAttributeNode(att);
 
                 console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${credit}, WUs: ${WUs}]`);
             }
