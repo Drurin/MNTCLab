@@ -21,7 +21,6 @@ body {
   text-align: center;
   width: 100%;
   top: -2px;
-  filter: blur(0.25px);
   /*If you're reading this, I'm so sorry about the non-standard coding. Chase Lindquist told me I could make jank code, so I did. - Ryan Lahlou*/
 }
 
