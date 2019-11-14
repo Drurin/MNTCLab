@@ -8,13 +8,11 @@ function scroller() {
             }
         }
     document.getElementById('scrollingText').innerHTML = `${string}`;
-});
+    });
 }
 
-document.onload = scroller();
+setInterval(foldinginfo, 3600000)
 window.onload = function () {
-    clock();
-
     function clock() {
         var now = new Date();
         var TwentyFourHour = now.getHours();
@@ -37,19 +35,20 @@ window.onload = function () {
         document.getElementById('clock').innerHTML = hour + ':' + min + ':' + sec + ' ' + mid;
         setTimeout(clock, 1000);
     }
+
+    clock();
 }
-setInterval(foldinginfo, 3600000)
+
 function foldinginfo() {
     fetch('https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
-     for (let i = 0; i < fetched.donors.length(); i++) {
-        let name = fetched.donor[i].name;
-        let rank = fetched.donor[i].rank;
-        let credit = fetched.donor[i].credit;
+        for (let i = 0; i < fetched.donors.length(); i++) {
+            let name = fetched.donor[i].name;
+            let rank = fetched.donor[i].rank;
+            let credit = fetched.donor[i].credit;
 
-        console.log(`${name}- [rank: ${rank}, credits: ${credit}`);
-    }
+            console.log(`${name}- [rank: ${rank}, credits: ${credit}`);
+        }
+    });
 }
 
-
-
-}
+document.onload = scroller();
