@@ -11,7 +11,6 @@ function scroller() {
     });
 }
 
-setInterval(foldinginfo, 3600000)
 window.onload = function () {
     function clock() {
         var now = new Date();
@@ -39,16 +38,17 @@ window.onload = function () {
     clock();
 }
 
-function foldinginfo() {
-    fetch('https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
-        for (let i = 0; i < fetched.donors.length(); i++) {
-            let name = fetched.donor[i].name;
-            let rank = fetched.donor[i].rank;
-            let credit = fetched.donor[i].credit;
+function foldinginfo() { //For future errors, refer to: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
+        fetch('https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
+            for (let i = 0; i < fetched.donors.length; i++) {
+                let name = fetched.donors[i].name;
+                let rank = fetched.donors[i].rank;
+                let credit = fetched.donors[i].credit;
 
-            console.log(`${name}- [rank: ${rank}, credits: ${credit}`);
-        }
-    });
+                console.log(`${name}- [rank: ${rank}, credits: ${credit}]`);
+            }
+        });
 }
 
+setInterval(foldinginfo(), 3600000)
 document.onload = scroller();
