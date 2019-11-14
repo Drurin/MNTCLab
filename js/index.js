@@ -10,7 +10,7 @@ function scroller() {
     document.getElementById('scrollingText').innerHTML = `${string}`;
 });
 }
-$('table').load('https://apps.foldingathome.org/teamstats/team227286.html #table');
+
 document.onload = scroller();
 window.onload = function () {
     clock();
@@ -37,4 +37,19 @@ window.onload = function () {
         document.getElementById('clock').innerHTML = hour + ':' + min + ':' + sec + ' ' + mid;
         setTimeout(clock, 1000);
     }
+}
+setInterval(foldinginfo, 3600000)
+function foldinginfo() {
+    fetch('https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
+     for (let i = 0; i < fetched.donors.length(); i++) {
+        let name = fetched.donor[i].name;
+        let rank = fetched.donor[i].rank;
+        let credit = fetched.donor[i].credit;
+
+        console.log(`${name}- [rank: ${rank}, credits: ${credit}`);
+    }
+}
+
+
+
 }
