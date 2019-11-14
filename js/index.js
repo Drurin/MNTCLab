@@ -10,8 +10,8 @@ function scroller() {
     document.getElementById('scrollingText').innerHTML = `${string}`;
 });
 }
+$('table').load('https://apps.foldingathome.org/teamstats/team227286.html #table');
 document.onload = scroller();
-
 window.onload = function () {
     clock();
 

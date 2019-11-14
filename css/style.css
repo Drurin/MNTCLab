@@ -7,6 +7,11 @@ body {
   color: #1A1F23;
 }
 
+#foldingbox {
+  background: #1A1F23;
+  color: #1A1F23;
+}
+
 #background {
   overflow: hidden; 
 }
