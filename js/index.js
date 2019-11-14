@@ -7,19 +7,17 @@ function scroller() {
                 string += `${fetched[i].names[ii]} <br>`;
             }
         }
-    document.getElementById('marquee').innerHTML = `${string}`;
+        document.getElementById('marquee').innerHTML = `${string}`;
+
+        $('.marquee').marquee({
+            speed: 75,
+            gap: 0,
+            delayBeforeStart: 0,
+            direction: 'up',
+            duplicated: true,
+        });
     });
 }
-
-$(function () {
-    $('.marquee').marquee({
-        speed: 5000,
-        gap: 5,
-        delayBeforeStart: 0,
-        direction: 'up',
-        duplicated: true,
-    });
-});
 
 window.onload = function () {
     function clock() {
