@@ -1,3 +1,8 @@
+* {
+  font-family: 'Nunito',
+  sans-serif;
+}
+
 body {
   background: #1A1F23;
 }
@@ -5,6 +10,11 @@ body {
 #header {
   background: #1A1F23;
   color: #1A1F23;
+}
+
+#headerO {
+  background: #11151788;
+  color: #111517;
 }
 
 #foldingbox {
@@ -18,7 +28,6 @@ body {
 
 #headertext {
   color: #ffffff;
-  font-family: 'Maven Pro', sans-serif;
   font-weight: bold;
   font-size: 40px;
   height: 45px;
@@ -31,7 +40,6 @@ body {
 
 #clock {
   color: #ffffff;
-  font-family: 'Maven Pro', sans-serif;
   font-weight: bold;
   font-size: 40px;
   height: 45px;
@@ -43,13 +51,13 @@ body {
   filter: blur(0.25px);
 }
 
-#scrollingText {
+.marquee {
   color: #ffffff;
-  font-family: 'Maven Pro', sans-serif;
   font-size: 30px;
   position: absolute !important;
   left: 10px;
   top: 54px;
   height:1026px;
-  width: 40%
+  width: 40%;
+  overflow: hidden;
 }

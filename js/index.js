@@ -7,9 +7,19 @@ function scroller() {
                 string += `${fetched[i].names[ii]} <br>`;
             }
         }
-    document.getElementById('scrollingText').innerHTML = `${string}`;
+    document.getElementById('marquee').innerHTML = `${string}`;
     });
 }
+
+$(function () {
+    $('.marquee').marquee({
+        speed: 5000,
+        gap: 5,
+        delayBeforeStart: 0,
+        direction: 'up',
+        duplicated: true,
+    });
+});
 
 window.onload = function () {
     function clock() {
@@ -42,10 +52,11 @@ function foldinginfo() { //For future errors, refer to: https://stackoverflow.co
         fetch('https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
             for (let i = 0; i < fetched.donors.length; i++) {
                 let name = fetched.donors[i].name;
-                let rank = fetched.donors[i].rank;
+                let globalRank = fetched.donors[i].rank;
                 let credit = fetched.donors[i].credit;
+                let WUs = fetched.donors[i].wus;
 
-                console.log(`${name}- [rank: ${rank}, credits: ${credit}]`);
+                console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${credit}, WUs: ${WUs}]`);
             }
         });
 }
