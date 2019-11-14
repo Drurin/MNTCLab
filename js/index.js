@@ -1,5 +1,5 @@
 function scroller() {
-    fetch('https://raw.githubusercontent.com/MNTCITLab/MNTCLab/master/certificationNames.json').then(r => r.json()).then(function (fetched) {
+    fetch('https://raw.githubusercontent.com/Drurin/MNTCLab/master/certificationNames.json').then(r => r.json()).then(function (fetched) {
         var string = "";
         for (i = 0; i < fetched.length; i++) {
             string += `<br><br><br><b><u>${fetched[i].certification}</u></b><br>`;
