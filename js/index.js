@@ -10,7 +10,7 @@ function scroller() {
         document.getElementById('marquee').innerHTML = `${string}`;
 
         $('.marquee').marquee({
-            speed: 75,
+            speed: 50,
             gap: 0,
             delayBeforeStart: 0,
             direction: 'up',
