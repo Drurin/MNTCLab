@@ -46,15 +46,33 @@ window.onload = function () {
     clock();
 }
 
+function abb(num, fixed) {
+    if (num === null) {
+        return null;
+    }
+    if (num === 0) {
+        return '0';
+    }
+    fixed = (!fixed || fixed < 0) ? 2 : fixed;
+    var b = (num).toPrecision(2).split("e"),
+        k = b.length === 1 ? 0 : Math.floor(Math.min(b[1].slice(1), 14) / 3),
+        c = k < 1 ? num.toFixed(0 + fixed) : (num / Math.pow(10, k * 3)).toFixed(1 + fixed),
+        d = c < 0 ? c : Math.abs(c),
+        e = d + ['', 'K', 'M', 'B', 'T'][k];
+    return e;
+}
+
 function foldinginfo() { //For future errors, refer to: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
         fetch('https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
             for (let i = 0; i < 20; i++) {
                 let name = fetched.donors[i].name;
                 let globalRank = fetched.donors[i].rank;
-                let credit = fetched.donors[i].credit;
-                let WUs = fetched.donors[i].wus;
+                let DCredit = fetched.donors[i].credit;
+                let DWUs = fetched.donors[i].wus;
                 let logo = fetched.logo;
                 let teamRank = fetched.rank;
+                let credit = fetched.credit;
+                let wus = fetched.wus;
 
                 
                 var anchor = document.getElementById("logo");
@@ -62,8 +80,10 @@ function foldinginfo() { //For future errors, refer to: https://stackoverflow.co
                 att.value = logo;
                 anchor.setAttributeNode(att);
 
-                document.getElementById('rank').innerHTML = `RANK <b style="font-weight: 900;">${teamRank}</b> -`;
-                console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${credit}, WUs: ${WUs}]`);
+                document.getElementById('credits').innerHTML = `${abb(credit)} Credits`;
+                document.getElementById('wus').innerHTML = `${abb(wus)} WUs`;
+                document.getElementById('rank').innerHTML = `RANK <b style="font-weight: 900;">${teamRank}</b>`;
+                console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${DCredit}, WUs: ${DWUs}]`);
             }
         });
 }
