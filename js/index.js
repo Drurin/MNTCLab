@@ -65,28 +65,46 @@ function abb(num, fixed) {
 function foldinginfo() { //For future errors, refer to: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
         fetch('https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
             for (let i = 0; i < 20; i++) {
-                let name = fetched.donors[i].name;
-                let globalRank = fetched.donors[i].rank;
-                let DCredit = fetched.donors[i].credit;
-                let DWUs = fetched.donors[i].wus;
-                let logo = fetched.logo;
-                let teamRank = fetched.rank;
-                let credit = fetched.credit;
-                let wus = fetched.wus;
-
+                window.logo = fetched.logo;
+                window.teamRank = fetched.rank;
+                window.credit = fetched.credit;
+                window.wus = fetched.wus;
+            }
                 
                 var anchor = document.getElementById("logo");
                 var att = document.createAttribute("src");
                 att.value = logo;
                 anchor.setAttributeNode(att);
 
-                document.getElementById('credits').innerHTML = `${abb(credit)} Credits`;
-                document.getElementById('wus').innerHTML = `${abb(wus)} WUs`;
+                let scoreNew, scorePast = credit;
+                let wusNew, wusPast = wus;
+                var now = new Date();
+                if (now.getHours() == 0) {
+                    scorePast = scoreNew;
+                    wusPast = wusNew;
+                    scoreNew = credit;
+                    wusNew = wus;
+                    document.getElementById('24hrC').innerHTML = `${abb(scoreNew - scorePast)} Credits`;
+                    document.getElementById('24hrW').innerHTML = `${abb(wusNew - wusPast)} WUs`;
+                }
+
+                let slCount = 0;
+                function SL() {
+                    if (slCount >= 20) {
+                        slCount = 0;
+                    }
+                    document.getElementById('spotlight').innerHTML = `<u><b>${fetched.donors[slCount].name}</b></u><br>Global Rank: ${fetched.donors[slCount].rank}, Team Rank: ${slCount+1}, Credits: ${abb(fetched.donors[slCount].credit)}, WUs: ${abb(fetched.donors[slCount].wus)}`;
+                    slCount++;
+                    setTimeout(SL, 20000);
+                }
+                SL();
+
+                document.getElementById('credits').innerHTML = `<b style="font-weight: 800;">${abb(credit)}</b> Credits`;
+                document.getElementById('wus').innerHTML = `<b style="font-weight: 800;">${abb(wus)}</b> WUs`;
                 document.getElementById('rank').innerHTML = `RANK <b style="font-weight: 900;">${teamRank}</b>`;
-                console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${DCredit}, WUs: ${DWUs}]`);
-            }
+            
         });
 }
 
-setInterval(foldinginfo(), 3600000)
+setInterval(foldinginfo(), 1800000)
 document.onload = scroller();
