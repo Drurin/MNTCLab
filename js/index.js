@@ -48,18 +48,21 @@ window.onload = function () {
 
 function foldinginfo() { //For future errors, refer to: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
         fetch('https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/team/227286').then(r => r.json()).then(function (fetched) {
-            for (let i = 0; i < fetched.donors.length; i++) {
+            for (let i = 0; i < 20; i++) {
                 let name = fetched.donors[i].name;
                 let globalRank = fetched.donors[i].rank;
                 let credit = fetched.donors[i].credit;
                 let WUs = fetched.donors[i].wus;
                 let logo = fetched.logo;
+                let teamRank = fetched.rank;
+
                 
                 var anchor = document.getElementById("logo");
                 var att = document.createAttribute("src");
                 att.value = logo;
                 anchor.setAttributeNode(att);
 
+                document.getElementById('rank').innerHTML = `RANK <b style="font-weight: 900;">${teamRank}</b> -`;
                 console.log(`${name}: [gRank: ${globalRank}, rank: ${i}, credits: ${credit}, WUs: ${WUs}]`);
             }
         });
